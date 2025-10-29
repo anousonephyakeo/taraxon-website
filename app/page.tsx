@@ -1,95 +1,105 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Detect if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     // Ensure video plays on mount
     if (videoRef.current) {
       videoRef.current.play().catch(err => {
         console.log('Autoplay prevented:', err);
       });
     }
+
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black">
-      {/* Video Background */}
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
+      {/* Video Background - Different for mobile and desktop */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
-          className="h-full w-full object-cover opacity-40 sm:opacity-50"
+          key={isMobile ? 'mobile' : 'desktop'}
+          className="h-full w-full object-cover opacity-50"
           autoPlay
           loop
           muted
           playsInline
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect fill='%23000000' width='1920' height='1080'/%3E%3C/svg%3E"
         >
-          <source src="/taraxon-404page.webm" type="video/webm" />
+          <source 
+            src={isMobile ? "/taraxon_mobile.webm" : "/taraxon-404page.webm"} 
+            type="video/webm" 
+          />
           Your browser does not support the video tag.
         </video>
-        {/* Overlay gradient - enhanced for better readability on all devices */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80"></div>
+        {/* Subtle gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
       </div>
 
-      {/* Content - with responsive spacing and sizing */}
-      <main className="relative z-10 flex flex-col items-center justify-center px-4 py-20 text-center sm:px-6 md:px-8 lg:px-10">
-        {/* Icon - responsive sizing */}
-        <div className="mb-6 animate-pulse sm:mb-8 md:mb-10">
-          <div className="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-full border-3 border-white/20 bg-white/5 backdrop-blur-sm sm:h-20 sm:w-20 sm:border-4 md:mb-4 lg:h-24 lg:w-24">
+      {/* Minimalist Content */}
+      <main className="relative z-10 flex flex-col items-center justify-center px-6 text-center">
+        {/* Subtle Icon */}
+        <div className="mb-8 md:mb-12">
+          <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:scale-110 hover:border-white/20 md:h-16 md:w-16">
             <svg
-              className="h-8 w-8 text-white sm:h-10 sm:w-10 lg:h-12 lg:w-12"
+              className="h-7 w-7 text-white/90 md:h-8 md:w-8"
               fill="none"
               stroke="currentColor"
+              strokeWidth={1.5}
               viewBox="0 0 24 24"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
               />
             </svg>
           </div>
         </div>
 
-        {/* Main Title - responsive text sizing */}
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-white sm:mb-4 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+        {/* Minimal Typography */}
+        <h1 className="mb-4 text-6xl font-light tracking-[0.2em] text-white md:text-7xl lg:text-8xl">
           TARAXON
         </h1>
         
-        {/* Subtitle - responsive sizing */}
-        <h2 className="mb-4 text-xl font-semibold text-white/90 sm:mb-6 sm:text-2xl md:text-3xl lg:text-4xl">
+        {/* Divider Line */}
+        <div className="mb-6 h-px w-24 bg-gradient-to-r from-transparent via-white/40 to-transparent md:w-32"></div>
+        
+        {/* Subtitle */}
+        <h2 className="mb-8 text-sm font-light uppercase tracking-[0.3em] text-white/70 md:text-base">
           Under Construction
         </h2>
         
-        {/* Description - responsive with better line breaks */}
-        <p className="mb-6 max-w-xs text-base text-white/70 sm:mb-8 sm:max-w-md sm:text-lg md:max-w-lg md:text-xl lg:max-w-xl">
-          We're working hard to bring you something amazing.
-          <br className="hidden sm:inline" />
-          <span className="sm:hidden"> </span>
-          Stay tuned!
+        {/* Minimalist Description */}
+        <p className="mb-12 max-w-sm text-sm font-light leading-relaxed text-white/60 md:max-w-md md:text-base">
+          Something extraordinary is on the horizon.
         </p>
 
-        {/* Loading Animation - responsive sizing */}
-        <div className="flex flex-col items-center gap-3 sm:gap-4">
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-white delay-0 sm:h-2 sm:w-2"></div>
-            <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-white delay-75 sm:h-2 sm:w-2"></div>
-            <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-white delay-150 sm:h-2 sm:w-2"></div>
-          </div>
-          <p className="text-xs font-medium uppercase tracking-widest text-white/60 sm:text-sm">
-            Coming Soon
-          </p>
+        {/* Subtle Loading Indicator */}
+        <div className="flex items-center gap-1.5">
+          <div className="h-1 w-1 animate-pulse rounded-full bg-white/60 [animation-delay:0ms]"></div>
+          <div className="h-1 w-1 animate-pulse rounded-full bg-white/60 [animation-delay:150ms]"></div>
+          <div className="h-1 w-1 animate-pulse rounded-full bg-white/60 [animation-delay:300ms]"></div>
         </div>
       </main>
 
-      {/* Footer - responsive positioning and sizing */}
-      <div className="absolute bottom-4 z-10 w-full px-4 text-center sm:bottom-6 md:bottom-8">
-        <p className="text-xs text-white/40 sm:text-sm">
-          © {new Date().getFullYear()} Taraxon. All rights reserved.
+      {/* Minimal Footer */}
+      <div className="absolute bottom-6 left-0 right-0 z-10 text-center md:bottom-8">
+        <p className="text-xs font-light tracking-wider text-white/30">
+          © {new Date().getFullYear()} Taraxon
         </p>
       </div>
     </div>
