@@ -12,9 +12,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#000000',
+};
+
 export const metadata: Metadata = {
   title: "Taraxon - Coming Soon",
   description: "Taraxon is under construction. Something amazing is coming soon. Stay tuned!",
+  icons: {
+    icon: '/favicon.ico',
+  },
+  openGraph: {
+    title: "Taraxon - Coming Soon",
+    description: "Something amazing is coming soon. Stay tuned!",
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
