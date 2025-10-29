@@ -32,7 +32,7 @@ export default function Home() {
         <video
           ref={videoRef}
           key={isMobile ? 'mobile' : 'desktop'}
-          className="h-full w-full object-cover opacity-50"
+          className="h-full w-full object-cover"
           autoPlay
           loop
           muted
@@ -45,7 +45,7 @@ export default function Home() {
           />
           Your browser does not support the video tag.
         </video>
-        {/* Original overlay gradient */}
+        {/* Balanced overlay gradient for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
       </div>
 
