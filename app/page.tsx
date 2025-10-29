@@ -26,13 +26,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
+    <div className="relative flex min-h-screen overflow-hidden bg-black">
       {/* Video Background - Different for mobile and desktop */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
           key={isMobile ? 'mobile' : 'desktop'}
-          className="h-full w-full object-cover opacity-30"
+          className="h-full w-full object-cover opacity-80"
           autoPlay
           loop
           muted
@@ -45,12 +45,12 @@ export default function Home() {
           />
           Your browser does not support the video tag.
         </video>
-        {/* Dark overlay for better text contrast and readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
+        {/* Lighter overlay for better video visibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40"></div>
       </div>
 
-      {/* Ultra Minimalist Content */}
-      <main className="relative z-10 flex flex-col items-center justify-center px-6 text-center">
+      {/* Ultra Minimalist Content - Positioned at Top */}
+      <main className="relative z-10 mt-[20vh] flex w-full flex-col items-center px-6 text-center">
         {/* Main Message */}
         <h1 className="mb-6 text-3xl font-light uppercase tracking-[0.4em] text-white md:text-4xl lg:text-5xl">
           Under Construction
