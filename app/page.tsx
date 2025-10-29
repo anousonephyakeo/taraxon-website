@@ -49,12 +49,17 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40"></div>
       </div>
 
-      {/* Ultra Minimalist Content - Positioned at Top */}
-      <main className="relative z-10 mt-[20vh] flex w-full flex-col items-center px-6 text-center">
+      {/* Bottom Content - Everything grouped together */}
+      <div className="absolute bottom-12 left-0 right-0 z-10 flex flex-col items-center gap-4 px-6 text-center md:bottom-16 md:gap-5">
         {/* Main Message */}
-        <h1 className="mb-6 text-3xl font-light uppercase tracking-[0.4em] text-white md:text-4xl lg:text-5xl">
+        <h1 className="text-2xl font-light uppercase tracking-[0.4em] text-white md:text-3xl lg:text-4xl">
           Under Construction
         </h1>
+        
+        {/* Slogan - Same style */}
+        <p className="text-xl font-light uppercase tracking-[0.4em] text-white md:text-2xl lg:text-3xl">
+          Something extraordinary is on the horizon
+        </p>
         
         {/* Subtle Loading Indicator */}
         <div className="flex items-center gap-1.5">
@@ -62,17 +67,9 @@ export default function Home() {
           <div className="h-1 w-1 animate-pulse rounded-full bg-white/60 [animation-delay:150ms]"></div>
           <div className="h-1 w-1 animate-pulse rounded-full bg-white/60 [animation-delay:300ms]"></div>
         </div>
-      </main>
-
-      {/* Footer with Slogan */}
-      <div className="absolute bottom-8 left-0 right-0 z-10 flex flex-col items-center gap-3 text-center md:bottom-12">
-        {/* Slogan */}
-        <p className="text-sm font-light italic tracking-wide text-white/50 md:text-base">
-          Something extraordinary is on the horizon
-        </p>
         
         {/* Copyright */}
-        <p className="text-xs font-light tracking-wider text-white/30">
+        <p className="mt-2 text-xs font-light tracking-wider text-white/30">
           © {new Date().getFullYear()} Taraxon
         </p>
       </div>
