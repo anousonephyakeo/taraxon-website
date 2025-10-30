@@ -22,11 +22,6 @@ export const viewport = {
 export const metadata: Metadata = {
   title: "Taraxon - Coming Soon",
   description: "Taraxon is under construction. Something amazing is coming soon. Stay tuned!",
-  icons: {
-    icon: '/taraxon_logo.png',
-    shortcut: '/taraxon_logo.png',
-    apple: '/taraxon_logo.png',
-  },
   openGraph: {
     title: "Taraxon - Coming Soon",
     description: "Something amazing is coming soon. Stay tuned!",
