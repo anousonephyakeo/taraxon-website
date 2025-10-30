@@ -23,12 +23,15 @@ export const metadata: Metadata = {
   title: "Taraxon - Coming Soon",
   description: "Taraxon is under construction. Something amazing is coming soon. Stay tuned!",
   icons: {
-    icon: '/favicon.ico',
+    icon: '/taraxon_logo.png',
+    shortcut: '/taraxon_logo.png',
+    apple: '/taraxon_logo.png',
   },
   openGraph: {
     title: "Taraxon - Coming Soon",
     description: "Something amazing is coming soon. Stay tuned!",
     type: 'website',
+    images: ['/taraxon_logo.png'],
   },
 };
 
